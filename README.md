@@ -18,13 +18,9 @@ Existing referring understanding tasks tend to involve the detection of a single
 
 
 
-## Citing RMOT
-If you find MOTR useful in your research, please consider citing:
-```bibtex
-@article{zeng2021motr,
-  title={MOTR: End-to-End Multiple-Object Tracking with TRansformer},
-  author={Zeng, Fangao and Dong, Bin and Zhang, Yuang and Wang, Tiancai and Zhang, Xiangyu and Wei, Yichen},
-  journal={arXiv preprint arXiv:2105.03247},
-  year={2021}
-}
-```
+## Acknowledgements
+
+- [MOTR](https://github.com/megvii-research/MOTR)
+- [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR)
+
+
