@@ -5,7 +5,7 @@ This repository is an official implementation of the paper [Referring Multi-Obje
 ## Introduction
 
 **TL; DR.** 
-RMOT is a new referring understanding task that can detect and track an arbitrary number of objects following human instruction. Refer-KITTI is the first benckmark to achieve the new task, and TransRMOT is a baseline model.
+RMOT is a new referring understanding task that can detect and track an arbitrary number of objects following human instruction. We propose the first RMOT benckmark Refer-KITTI, and a baseline model TransRMOT.
 
 <div style="align: center">
 <img src=./figs/TransRMOT.png/>
