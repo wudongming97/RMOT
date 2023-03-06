@@ -8,7 +8,7 @@ This repository is an official implementation of the paper [Referring Multi-Obje
 RMOT is a new referring understanding task. 
 
 <div style="align: center">
-<img src=./figs/motr.png/>
+<img src=./figs/TransRMOT.png/>
 </div>
 
 **Abstract.** 
