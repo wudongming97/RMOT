@@ -20,6 +20,15 @@ Existing referring understanding tasks tend to involve the detection of a single
 ## Citing RMOT
 If you find RMOT useful in your research, please consider citing:
 
+```bibtex
+@inproceedings{wu2023rmot,
+  title={Referring Multi-Object Tracking},
+  author={Dongming Wu, Wencheng Han, Tiancai Wang, Xingping Dong, Xiangyu Zhang and Jianbing Shen},
+  booktitle={CVPR},
+  year={2023}
+}
+```
+
 
 
 ## Acknowledgements
