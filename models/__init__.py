@@ -8,7 +8,7 @@
 # ------------------------------------------------------------------------
 
 from .deformable_detr import build as build_deformable_detr
-from .rmot import build as build_rmot
+from .transrmot import build as build_rmot
 
 
 def build_model(args):

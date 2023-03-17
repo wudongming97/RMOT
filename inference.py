@@ -159,7 +159,7 @@ class Track(object):
         self.clear_miss()
 
 
-class MOTR(object):
+class TransRMOT(object):
     def __init__(self, max_age=1, min_hits=3, iou_threshold=0.3):
         """
         Sets key parameters for SORT
@@ -388,26 +388,22 @@ class Detector(object):
         self.checkpoint_id = checkpoint_id
 
         self.seq_num = seq_num
-        img_list = os.listdir(os.path.join(self.args.mot_path, 'KITTI/training/image_02', self.seq_num[0]))
-        img_list = [os.path.join(self.args.mot_path, 'KITTI/training/image_02', self.seq_num[0], _) for _ in img_list
-                    if ('jpg' in _) or ('png' in _)]
+        img_list = os.listdir(os.path.join(self.args.rmot_path, 'KITTI/training/image_02', self.seq_num[0]))
+        img_list = [os.path.join(self.args.rmot_path, 'KITTI/training/image_02', self.seq_num[0], _)
+                    for _ in img_list if ('jpg' in _) or ('png' in _)]
 
         self.img_list = sorted(img_list)
         self.img_len = len(self.img_list)
 
-        self.json_path = os.path.join('/data/Dataset/KITTI/expression_clean/', seq_num[0], seq_num[1])
+        self.json_path = os.path.join(self.args.rmot_path, 'expression', seq_num[0], seq_num[1])
         with open(self.json_path, 'r') as f:
             json_info = json.load(f)
         self.json_info = json_info
         self.sentence = [json_info['sentence']]
-        # self.sentence = ['cars']
-        # self.sentence = ['persons in the black']
 
-        self.tr_tracker = MOTR()
+        self.tr_tracker = TransRMOT()
         self.save_path = os.path.join(self.args.output_dir,
                                       'results_epoch{}/{}/{}'.format(checkpoint_id, seq_num[0], seq_num[1].split('.')[0]))
-        # self.save_path = os.path.join(self.args.output_dir,
-        #                               'results_epoch{}_supp/{}/{}'.format(checkpoint_id, seq_num[0], 'cars'))
         os.makedirs(self.save_path, exist_ok=True)
 
         self.predict_path = os.path.join(self.args.output_dir, args.exp_name)
@@ -429,7 +425,7 @@ class Detector(object):
 
     @staticmethod
     def filter_dt_by_ref_scores(dt_instances: Instances, ref_threshold: float) -> Instances:
-        keep = dt_instances.refs > ref_threshold
+        keep = dt_instances.refers > ref_threshold
         return dt_instances[keep]
 
     @staticmethod
@@ -459,7 +455,6 @@ class Detector(object):
                     continue
                 frame_gt = np.loadtxt(
                     os.path.join(gt_txt_file, '{:06d}.txt'.format(frame_id))).reshape(-1, 6)
-                # frame_gt = np.loadtxt(os.path.join(gt_txt_file, '000140.txt'))
                 for frame_gt_line in frame_gt:
                     aa = json_info['label'][k]  # all gt from frame
                     aa = [int(a) for a in aa]
@@ -469,27 +464,8 @@ class Detector(object):
                         line = save_format.format(frame=frame_id, id=track_id, x1=x1 * im_width, y1=y1 * im_height,
                                                   w=w * im_width, h=h * im_height)
                         f.write(line)
-        # with open(txt_path, 'w') as f:
-        #     frame_gt_files = os.listdir(gt_txt_file)
-        #     frame_gt_files = sorted(frame_gt_files)
-        #     for frame_gt_file in frame_gt_files:
-        #         frame_id = int(frame_gt_file.split('.')[0]) + 1
-        #         frame_gt = np.loadtxt(os.path.join(gt_txt_file, frame_gt_file)).reshape(-1, 6)
-        #         for frame_gt_line in frame_gt:
-        #             track_id = int(frame_gt_line[1])
-        #             x1, y1, w, h = frame_gt_line[2:6] # KITTI -> [x1, y1, w, h]
-        #             line = save_format.format(frame=frame_id, id=track_id, x1=x1 * im_width, y1=y1 * im_height,
-        #                                       w=w * im_width, h=h * im_height)
-        #             f.write(line)
 
         print('save gt to {}'.format(txt_path))
-
-    def eval_seq(self):
-        data_root = os.path.join(self.args.mot_path, 'MOT15/images/train')
-        result_filename = os.path.join(self.predict_path, 'gt.txt')
-        evaluator = Evaluator(data_root, self.seq_num)
-        accs = evaluator.eval_file(result_filename)
-        return accs
 
     @staticmethod
     def visualize_img_with_bbox(img_path, img, dt_instances: Instances, ref_pts=None, gt_boxes=None):
@@ -510,10 +486,6 @@ class Detector(object):
         total_dts = 0
         total_occlusion_dts = 0
         print('Results are saved into {}'.format(self.save_path))
-
-        # meta_info = open(os.path.join(data_root, self.seq_num[0], 'seqinfo.ini')).read()
-        # im_width = int(meta_info[meta_info.find('imWidth=') + 8:meta_info.find('\nimHeight')])
-        # im_height = int(meta_info[meta_info.find('imHeight=') + 9:meta_info.find('\nimExt')])
 
         track_instances = None
         loader = DataLoader(ListImgDataset(self.img_list), 1, num_workers=2)
@@ -538,16 +510,14 @@ class Detector(object):
             dt_instances = self.filter_dt_by_area(dt_instances, area_threshold)
 
             # filter det instances by refer scores
-            dt_instances = self.filter_dt_by_ref_scores(dt_instances, 0.4)
-            # print('Number of Instances:', len(dt_instances))
+            dt_instances = self.filter_dt_by_ref_scores(dt_instances, 0.5)
 
             num_occlusion = (dt_instances.labels == 1).sum()
             dt_instances.scores[dt_instances.labels == 1] *= -1
             total_dts += len(dt_instances)
             total_occlusion_dts += num_occlusion
 
-            vis = False
-            if vis:
+            if args.visualization:
                 # for visual
                 cur_vis_img_path = os.path.join(self.save_path, 'frame_{}.jpg'.format(i))
                 gt_boxes = None
@@ -561,8 +531,7 @@ class Detector(object):
                                identities=tracker_outputs[:, 5])
         gt_path = os.path.join(self.save_path, 'gt.txt')
         self.write_gt(gt_path, self.json_path,
-                      os.path.join('/data/Dataset/KITTI/labels_with_ids/image_02', self.seq_num[0]),
-                      seq_h, seq_w)
+                      os.path.join(args.rmot_path, 'KITTI/labels_with_ids/image_02', self.seq_num[0]), seq_h, seq_w)
         print("totally {} dts {} occlusion dts".format(total_dts, total_occlusion_dts))
 
 
@@ -581,37 +550,16 @@ if __name__ == '__main__':
     detr.eval()
     detr = detr.cuda()
 
-    # # '''for MOT17 submit'''
-    # sub_dir = 'MOT17/images/test'
-    # seq_nums = ['MOT17-01-SDP',
-    #             'MOT17-03-SDP',
-    #             'MOT17-06-SDP',
-    #             'MOT17-07-SDP',
-    #             'MOT17-08-SDP',
-    #             'MOT17-12-SDP',
-    #             'MOT17-14-SDP']
-    data_root = '/data/Dataset/KITTI/training/image_02/'
-    expressions_root = '/data/Dataset/KITTI/expression_clean/'
-    # video_ids = sorted(os.listdir(expressions_root))
+    expressions_root = os.path.join(args.rmot_path, 'expression')
     video_ids = ['0005', '0011', '0013']
-    # video_ids = ['0011']
-    # video_ids = ['MOT17-11-SDP']
 
     seq_nums = []
     for video_id in video_ids:  # we have multiple videos
         expression_jsons = sorted(os.listdir(os.path.join(expressions_root, video_id)))
         for expression_json in expression_jsons:  # each video has multiple expression json files
-            # with open(osp.join(expressions_root, video_id, expression_json), 'r') as f:
-            #     a = json.load(f)
             seq_nums.append([video_id, expression_json])
-        # expression_jsons = sorted(os.listdir(os.path.join(expressions_root, video_id)))
-        # seq_nums.append([video_id, expression_jsons[0]])
-    # print(seq_nums)
 
     for seq_num in seq_nums:
-        # if '' in seq_num[1]:
-            #     # continue
-            # if seq_num[1] == 'males.json':
         print('Evaluating seq {}'.format(seq_num))
         det = Detector(args, checkpoint_id, model=detr, seq_num=seq_num)
         det.detect()
