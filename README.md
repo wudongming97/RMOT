@@ -1,6 +1,6 @@
 # Referring Multi-Object Tracking
 
-This repository is an official implementation of the paper [Referring Multi-Object Tracking](https://arxiv.org/abs/2303.03366).
+This repository is an official implementation of the paper [Referring Multi-Object Tracking](https://arxiv.org/abs/2303.03366). More project details can be found in the [website](https://referringmot.github.io/).
 
 ## Introduction
 
@@ -40,7 +40,7 @@ The Refer-KITTI is organized as follows:
 
 ### Training
 You can download COCO pretrained weights from [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR).
-Then training MOTR on 8 GPUs as following:
+Then training TransRMOT on 8 GPUs as following:
 ```bash 
 sh configs/r50_rmot_train.sh
 ```
