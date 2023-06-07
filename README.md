@@ -74,8 +74,9 @@ If you find RMOT useful in your research, please consider citing:
 ```bibtex
 @inproceedings{wu2023referring,
   title={Referring Multi-Object Tracking},
-  author={Dongming Wu, Wencheng Han, Tiancai Wang, Xingping Dong, Xiangyu Zhang and Jianbing Shen},
-  booktitle={CVPR},
+  author={Wu, Dongming and Han, Wencheng and Wang, Tiancai and Dong, Xingping and Zhang, Xiangyu and Shen, Jianbing},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={14633--14642},
   year={2023}
 }
 ```
