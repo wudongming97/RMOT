@@ -521,13 +521,13 @@ if __name__ == '__main__':
     detr = detr.cuda()
 
     expressions_root = os.path.join(args.rmot_path, 'expression')
-    video_ids = ['0007']
+    video_ids = ['0020']
 
     seq_nums = []
     for video_id in video_ids:  # we have multiple videos
         expression_jsons = sorted(os.listdir(os.path.join(expressions_root, video_id)))
         for expression_json in expression_jsons:  # each video has multiple expression json files
-            if expression_json != 'parking-cars.json':
+            if expression_json != 'light-color-cars-in-the-left.json':
                 continue
             seq_nums.append([video_id, expression_json])
 
