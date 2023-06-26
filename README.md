@@ -67,7 +67,7 @@ The main results of TransRMOT:
 | TransRMOT  | Refer-KITTI |  38.06   |  29.28   |  50.83   |   40.19   |   47.36   |   55.43   | 81.36     | 79.93    | [model](https://drive.google.com/drive/folders/1CjX1Y5XJ2zRloTEQM1OHQsF1RCuBLXbc?usp=sharing) |
 
 
-We also provide FairMOT results as references [Google Drive](https://drive.google.com/file/d/1bPfe8dU_dcYZicuoy67CaasI_YMj45Ic/view?usp=sharing).
+We also provide FairMOT results as references from [Google Drive](https://drive.google.com/file/d/1bPfe8dU_dcYZicuoy67CaasI_YMj45Ic/view?usp=sharing).
 
 
 
