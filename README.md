@@ -36,7 +36,7 @@ The Refer-KITTI is organized as follows:
 │           ├── labels_with_ids
 │   └── Expression
 ```
-
+Note: our expression (.json) contains corresponding object ids, and the corresponding boxes can be found in 'labels_with_ids' using these ids.
 
 ### Training
 You can download COCO pretrained weights from [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR).
@@ -45,7 +45,7 @@ Then training TransRMOT on 8 GPUs as following:
 sh configs/r50_rmot_train.sh
 ```
 
-### Evaluation
+### Testing
 You can download the pretrained model of TransRMOT (the link is in "Main Results" session), then run following command to generate and save prediction boxes:
 ```bash
 sh configs/r50_rmot_test.sh
@@ -60,11 +60,14 @@ sh evaluate_rmot.sh
 ## Results
 
 
+The main results of TransRMOT:
+
 | **Method** | **Dataset** | **HOTA** | **DetA** | **AssA** | **DetRe** | **DetPr** | **AssRe** | **AssRe** | **LocA** |                                           **URL**                                           |
 |:----------:|:-----------:|:--------:|:--------:|:--------:|:---------:|:---------:|:---------:|-----------|----------| :-----------------------------------------------------------------------------------------: |
 | TransRMOT  | Refer-KITTI |  38.06   |  29.28   |  50.83   |   40.19   |   47.36   |   55.43   | 81.36     | 79.93    | [model](https://drive.google.com/drive/folders/1CjX1Y5XJ2zRloTEQM1OHQsF1RCuBLXbc?usp=sharing) |
 
 
+We also provide FairMOT results as references [Google Drive](https://drive.google.com/file/d/1bPfe8dU_dcYZicuoy67CaasI_YMj45Ic/view?usp=sharing).
 
 
 
