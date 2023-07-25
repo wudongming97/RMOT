@@ -39,7 +39,8 @@ The Refer-KITTI is organized as follows:
 Note: our expression (.json) contains corresponding object ids, and the corresponding boxes can be found in 'labels_with_ids' using these ids.
 
 ### Training
-You can download COCO pretrained weights from [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR).
+You can download COCO pretrained weights from [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR) '+ iterative bounding box refinement'.
+The RoBERTa weights can be downloaded from [Hugging Face](https://huggingface.co/roberta-base/tree/main).
 Then training TransRMOT on 8 GPUs as following:
 ```bash 
 sh configs/r50_rmot_train.sh
