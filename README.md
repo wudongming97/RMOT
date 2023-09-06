@@ -37,6 +37,8 @@ The Refer-KITTI is organized as follows:
 │   └── Expression
 ```
 Note: our expression (.json) contains corresponding object ids, and the corresponding boxes can be found in 'labels_with_ids' using these ids.
+The 'label_with_ids' is generated from a script from folder `tools`.
+But we strongly recommend **not** using it because the generated track_id may not correspond the track_id of our expression files.
 
 ### Training
 You can download COCO pretrained weights from [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR) '+ iterative bounding box refinement'.
