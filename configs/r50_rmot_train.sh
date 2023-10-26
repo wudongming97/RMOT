@@ -6,7 +6,7 @@
 # ------------------------------------------------------------------------
 
 
-PRETRAIN=/data/wudongming/MOTR/coco_model_final.pth
+PRETRAIN=./r50_deformable_detr_plus_iterative_bbox_refinement-checkpoint.pth
 EXP_DIR=default
 python3 -m torch.distributed.launch --nproc_per_node=8 \
    --use_env main.py \
