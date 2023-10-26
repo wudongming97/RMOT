@@ -25,7 +25,7 @@ Existing referring understanding tasks tend to involve the detection of a single
 The basic environment setup is on top of [MOTR](https://github.com/megvii-research/MOTR), including conda environment, pytorch version and other requirements. 
 
 ### Dataset
-You can download [our created expression](https://github.com/wudongming97/RMOT/releases/tag/v1.0/expression.zip) and [labels_with_ids](https://github.com/wudongming97/RMOT/releases/tag/v1.0/labels_with_ids.zip). 
+You can download [our created expression](https://github.com/wudongming97/RMOT/releases/download/tag/v1.0/expression.zip) and [labels_with_ids](https://github.com/wudongming97/RMOT/releases/download/tag/v1.0/labels_with_ids.zip). 
 The KITTI images are from [official website](https://www.cvlibs.net/datasets/kitti/eval_tracking.php), which are unzipped into `./KITTI/training`.
 The Refer-KITTI is organized as follows:
 
@@ -57,7 +57,7 @@ You can download the pretrained model of TransRMOT (the link is in "Main Results
 sh configs/r50_rmot_test.sh
 ```
 
-You can get the main results by runing the evaluation part. You can also use our [prediction and gt file](https://github.com/wudongming97/RMOT/releases/tag/v1.0/results_epoch99.zip). 
+You can get the main results by runing the evaluation part. You can also use our [prediction and gt file](https://github.com/wudongming97/RMOT/releases/download/tag/v1.0/results_epoch99.zip). 
 ```bash
 cd TrackEval/script
 sh evaluate_rmot.sh
@@ -73,7 +73,7 @@ The main results of TransRMOT:
 | TransRMOT  | Refer-KITTI |  38.06   |  29.28   |  50.83   |   40.19   |   47.36   |   55.43   | 81.36     | 79.93    | [model](https://drive.google.com/drive/folders/1CjX1Y5XJ2zRloTEQM1OHQsF1RCuBLXbc?usp=sharing) |
 
 
-We also provide [FairMOT results](https://github.com/wudongming97/RMOT/releases/tag/v1.0/FairMOT_results.zip) as references.
+We also provide [FairMOT results](https://github.com/wudongming97/RMOT/releases/download/tag/v1.0/FairMOT_results.zip) as references.
 
 
 
