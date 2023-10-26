@@ -34,19 +34,21 @@ The Refer-KITTI is organized as follows:
 │   ├── KITTI
 │           ├── training
 │           ├── labels_with_ids
-│   └── Expression
+│   └── expression
 ```
-Note: our expression (.json) contains corresponding object ids, and the corresponding boxes can be found in 'labels_with_ids' using these ids.
-The 'label_with_ids' is generated from a script from folder `tools`.
+Note: 
+- Our expression (.json) contains corresponding object ids, and the corresponding boxes can be found in 'labels_with_ids' using these ids.
+- The 'label_with_ids' is generated from a script from folder `tools`.
 But we strongly recommend **not** using it because the generated track_id may not correspond the track_id of our expression files.
 
 ### Training
-You can download COCO pretrained weights from [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR) '+ iterative bounding box refinement'.
-The RoBERTa weights can be downloaded from [Hugging Face](https://huggingface.co/roberta-base/tree/main).
+You can download COCO pretrained weights from [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR) **+ iterative bounding box refinement**.
 Then training TransRMOT on 8 GPUs as following:
 ```bash 
 sh configs/r50_rmot_train.sh
 ```
+Note:
+- If the RoBERTa is not working well, please download the RoBERTa weights from [Hugging Face](https://huggingface.co/roberta-base/tree/main) for local using.
 
 ### Testing
 You can download the pretrained model of TransRMOT (the link is in "Main Results" session), then run following command to generate and save prediction boxes:
