@@ -70,7 +70,7 @@ The main results of TransRMOT:
 
 | **Method** | **Dataset** | **HOTA** | **DetA** | **AssA** | **DetRe** | **DetPr** | **AssRe** | **AssRe** | **LocA** |                                           **URL**                                           |
 |:----------:|:-----------:|:--------:|:--------:|:--------:|:---------:|:---------:|:---------:|-----------|----------| :-----------------------------------------------------------------------------------------: |
-| TransRMOT  | Refer-KITTI |  38.06   |  29.28   |  50.83   |   40.19   |   47.36   |   55.43   | 81.36     | 79.93    | [model](https://drive.google.com/drive/folders/1CjX1Y5XJ2zRloTEQM1OHQsF1RCuBLXbc?usp=sharing) |
+| TransRMOT  | Refer-KITTI |  38.06   |  29.28   |  50.83   |   40.19   |   47.36   |   55.43   | 81.36     | 79.93    | [model](https://github.com/wudongming97/RMOT/releases/download/v1.0/checkpoint0099.pth) |
 
 
 We also provide [FairMOT results](https://github.com/wudongming97/RMOT/releases/download/v1.0/FairMOT_results.zip) as references.
