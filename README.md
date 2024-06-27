@@ -2,6 +2,8 @@
 
 This repository is an official implementation of the paper [Referring Multi-Object Tracking](https://arxiv.org/abs/2303.03366). More project details can be found in the [website](https://referringmot.github.io/).
 
+:heavy_exclamation_mark: The bootstrapped version of this repository is released. Please see [TempRMOT](https://github.com/zyn213/TempRMOT).
+
 ## Introduction
 
 
